@@ -29,7 +29,11 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-python
+      - test-python:
+          filters:
+            branches:
+              only: /.*/
+
     # - deploy:
     #     requires:
     #       - test-python
