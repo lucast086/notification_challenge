@@ -1,9 +1,17 @@
+[tool.poetry]
+name = "workspace"
+version = "0.1.0"
+description = "notification challenge"
+authors = [
+    {name = "Lucas",email = "turlettilucasdev@gmail.com"}
+]
+
 [project]
 name = "workspace"
 version = "0.1.0"
-description = ""
+description = "notification challenge"
 authors = [
-    {name = "Your Name",email = "you@example.com"}
+    {name = "Lucas",email = "turlettilucasdev@gmail.com"}
 ]
 requires-python = ">=3.13"
 dependencies = [
