@@ -2,9 +2,7 @@
 name = "workspace"
 version = "0.1.0"
 description = "notification challenge"
-authors = [
-    {name = "Lucas",email = "turlettilucasdev@gmail.com"}
-]
+authors = ["Lucas Turletti"]
 
 [project]
 name = "workspace"
