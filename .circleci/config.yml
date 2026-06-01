@@ -14,9 +14,14 @@ jobs:
           pkg-manager: poetry
       - run:
           name: Run tests
-          command: poetry run pytest --cov --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
+          command: poetry run pytest --cov --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.') 
+      - run:
+          name: Send to Coveralls
+          command: poetry run coveralls
       - store_test_results:
           path: junit.xml
+
+
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
