@@ -1,0 +1,45 @@
+
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    environment:
+      - PYTHONPATH=/workspace
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/fullstackapp
+      - GIT_AUTHOR_NAME=lucast086
+      - GIT_AUTHOR_EMAIL=turlettilucasdev@gmail.com
+      - GIT_COMMITTER_NAME=lucast086
+      - GIT_COMMITTER_EMAIL=turlettilucasdev@gmail.com
+    depends_on:
+      - db
+    ports:
+      - "8009:8000"
+    networks:
+      - fullstackapp_network
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fullstackapp
+    ports:
+      - "5435:5432"
+    networks:
+      - fullstackapp_network
+
+volumes:
+  postgres-data:
+
+networks:
+  fullstackapp_network:
+    driver: bridge
