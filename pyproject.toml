@@ -3,6 +3,7 @@ name = "workspace"
 version = "0.1.0"
 description = "notification challenge"
 authors = ["Lucas Turletti"]
+package-mode = false
 
 [project]
 name = "workspace"
