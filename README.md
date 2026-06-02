@@ -76,40 +76,52 @@ Database schema changes are managed with Alembic, keeping migrations versioned a
 - Docker and Docker Compose installed
 - Linux/Mac terminal
 - No services running on ports `8000` and `5432`
-- A `.env` file in the project root (see below)
-
-**Required environment variables:**
-
-```env
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/fullstackapp
-SECRET_KEY=your_secret_key
-ALGORITHM=HS256
-```
 
 ---
 
 ## Run the App
+
+### Option 1 — Docker Compose (no devcontainer required)
 
 ```bash
 chmod +x run_dev.sh
 ./run_dev.sh
 ```
 
-This starts the API and PostgreSQL via Docker Compose.
+This builds the image and starts the API + PostgreSQL. Environment variables are pre-configured in `docker-compose-dev.yml` for local development.
 
 Once running:
 - API: http://localhost:8000
 - Swagger UI: http://localhost:8000/docs
 
+To stop:
+```bash
+docker compose -f docker-compose-dev.yml down
+```
+
+### Option 2 — Devcontainer (VS Code / Cursor)
+
+Open the project in VS Code or Cursor and reopen in container when prompted. The devcontainer sets up the full environment automatically including Poetry, PostgreSQL, and all extensions.
+
+Once inside the container, run the app with:
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
 ---
 
 ## Run Tests
 
+### Via Docker (from host machine)
+
 ```bash
-docker compose -f docker-compose-test.yml up --build
+chmod +x run_test.sh
+./run_test.sh
 ```
 
-Or locally with Poetry:
+Builds the image, runs the full test suite, prints `Tests passed` or `Tests failed`, and exits.
+
+### Via Poetry (inside devcontainer)
 
 ```bash
 poetry run pytest
