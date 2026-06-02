@@ -16,17 +16,17 @@ from app.utils.constants import (
 
 
 def validate_password(v: SecretStr) -> SecretStr:
-    """Validate a password against the configured policy rules.
+   """Validate a password against the configured policy rules.
 
-    Args:
-        v: The password to validate.
+   Args:
+       v: The password to validate.
 
-    Returns:
-        The original password if all rules pass.
+   Returns:
+       The original password if all rules pass.
 
-    Raises:
-        ValueError: If any policy rule is violated.
-    """
+   Raises:
+       ValueError: If any policy rule is violated.
+   """
 
    if len(v.get_secret_value()) < MIN_LENGTH or len(v.get_secret_value()) > MAX_LENGTH:
       raise ValueError(f"length should be at least {MIN_LENGTH} but not more than {MAX_LENGTH}")
