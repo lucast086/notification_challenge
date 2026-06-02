@@ -5,7 +5,7 @@ from app.core.exceptions import DeviceTokenInvalid
 from app.models.notifications import Notification
 
 
-class SendByPush():
+class SendByPush:
     """Channel strategy that delivers notifications via push notification."""
 
     def _device_token_is_valid(self):
@@ -15,10 +15,10 @@ class SendByPush():
 
     def _format_payload(self):
         """Format the push notification payload before sending."""
-        #simulate some format
+        # simulate some format
         pass
 
-    def send(self, notification: Notification) -> Dict[str,Any]:
+    def send(self, notification: Notification) -> Dict[str, Any]:
         """Send a notification via push.
 
         Args:
@@ -32,11 +32,10 @@ class SendByPush():
         """
         if not self._device_token_is_valid():
             raise DeviceTokenInvalid()
-        
+
         self._format_payload()
         return {
             "status": "sent",
             "recipient": notification.recipient,
-            "sendend_at": datetime.now()
+            "sendend_at": datetime.now().isoformat(),
         }
-    

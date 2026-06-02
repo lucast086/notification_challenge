@@ -4,10 +4,10 @@ from typing import Any, Dict
 from app.models.notifications import Notification
 
 
-class SendBySms():
+class SendBySms:
     """Channel strategy that delivers notifications via SMS."""
 
-    def send(self, notification: Notification) -> Dict[str,Any]:
+    def send(self, notification: Notification) -> Dict[str, Any]:
         """Send a notification via SMS, truncating content to 160 characters.
 
         Args:
@@ -19,7 +19,7 @@ class SendBySms():
         notification.content = notification.content[:160]
         return {
             "status": "sent",
-            "content":notification.content,
+            "content": notification.content,
             "recipient": notification.recipient,
-            "sendend_at": datetime.now()
+            "sendend_at": datetime.now().isoformat(),
         }
