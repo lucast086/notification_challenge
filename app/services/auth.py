@@ -15,7 +15,13 @@ from app.schemas.auth import LoginCredentials, Token
 
 
 class AuthService:
-    
+    """Service that handles user authentication and JWT token generation.
+
+    Attributes:
+        hasher: bcrypt context used to hash and verify passwords.
+        user_repository: Repository used to look up users by email.
+    """
+
     hasher = CryptContext(schemes=["bcrypt"])
 
     def __init__(self, user_repository: Annotated[UserRepositoryProtocol, Depends(UserRepository)]) -> None:

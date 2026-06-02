@@ -16,6 +16,17 @@ from app.utils.constants import (
 
 
 def validate_password(v: SecretStr) -> SecretStr:
+    """Validate a password against the configured policy rules.
+
+    Args:
+        v: The password to validate.
+
+    Returns:
+        The original password if all rules pass.
+
+    Raises:
+        ValueError: If any policy rule is violated.
+    """
 
    if len(v.get_secret_value()) < MIN_LENGTH or len(v.get_secret_value()) > MAX_LENGTH:
       raise ValueError(f"length should be at least {MIN_LENGTH} but not more than {MAX_LENGTH}")
@@ -43,17 +54,24 @@ ValidatePassword = Annotated[SecretStr, AfterValidator(validate_password)]
 
 
 class UserBase(SQLModel):
+    """Base schema with fields shared by all user DTOs."""
+
     email: EmailStr
 
 class UserCreate(UserBase):
+    """Schema for user registration requests."""
+
     password: ValidatePassword
     password_repeat: SecretStr
-    
+
     @model_validator(mode='after')
     def check_passwords_match(self) -> Self:
+        """Ensure password and password_repeat are identical."""
         if self.password.get_secret_value() != self.password_repeat.get_secret_value():
             raise ValueError('Passwords do not match')
         return self
 
 class UserPublic(UserBase):
+    """Schema for user data returned in API responses."""
+
     pass

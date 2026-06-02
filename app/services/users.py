@@ -11,7 +11,11 @@ from app.schemas.users import UserCreate, UserPublic
 
 
 class UserService:
+    """Service that handles user registration business logic.
 
+    Attributes:
+        user_repository: Repository used to persist and query users.
+    """
 
     def __init__(self, user_repository: Annotated[UserRepositoryProtocol, Depends(UserRepository)]) -> None:
         self.user_repository = user_repository

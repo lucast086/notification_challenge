@@ -9,6 +9,11 @@ from app.models.notifications import Notification
 
 
 class NotificationRepository():
+    """Repository that handles all database operations for Notification entities.
+
+    Attributes:
+        session: The async database session used for queries.
+    """
 
     def __init__(self, session: Annotated[AsyncSession, Depends(get_async_session)]) -> None:
         self.session = session

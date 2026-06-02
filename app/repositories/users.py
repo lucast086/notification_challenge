@@ -11,6 +11,11 @@ from app.models.users import User
 
 
 class UserRepository():
+    """Repository that handles all database operations for User entities.
+
+    Attributes:
+        session: The async database session used for queries.
+    """
 
     def __init__(self, session: Annotated[AsyncSession, Depends(get_async_session)]) -> None:
         self.session = session

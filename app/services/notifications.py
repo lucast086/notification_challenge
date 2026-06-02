@@ -18,6 +18,11 @@ from app.utils.mappers import notifications as notificationMapper
 
 
 class NotificationService():
+    """Service that handles notification CRUD and channel dispatch logic.
+
+    Attributes:
+        notification_repository: Repository used to persist and query notifications.
+    """
 
     def __init__(self, notification_repository: Annotated[NotificationRepositoryProtocol, Depends(NotificationRepository)]) -> None:
         self.notification_repository = notification_repository

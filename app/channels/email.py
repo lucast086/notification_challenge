@@ -8,9 +8,10 @@ from app.models.notifications import Notification
 
 
 class SendByEmail():
+    """Channel strategy that delivers notifications via email."""
 
     def _recipient_format_is_valid(self, email:str):
-        """Check whether the recipient email address has a valid Sformat."""
+        """Check whether the recipient email address has a valid format."""
         try:
             validate_email(email)
             return True

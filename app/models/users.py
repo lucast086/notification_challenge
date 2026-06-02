@@ -4,6 +4,7 @@ from app.schemas.users import UserBase
 
 
 class User(UserBase, table=True):
+    """Database model representing a registered user."""
     id: int | None = Field(default=None, primary_key=True)
     hashed_password: str = Field(
     nullable=False,   

@@ -6,6 +6,7 @@ from app.models.notifications import Notification
 
 
 class SendByPush():
+    """Channel strategy that delivers notifications via push notification."""
 
     def _device_token_is_valid(self):
         """Check whether the device token is valid."""

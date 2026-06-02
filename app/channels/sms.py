@@ -5,6 +5,7 @@ from app.models.notifications import Notification
 
 
 class SendBySms():
+    """Channel strategy that delivers notifications via SMS."""
 
     def send(self, notification: Notification) -> Dict[str,Any]:
         """Send a notification via SMS, truncating content to 160 characters.
